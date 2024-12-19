@@ -16,7 +16,7 @@ node {
             }
                 sh "docker push premcloud/myweb:0.0.1"
             }
-    stage('Nexus image push')
+    stage('Nexus image push'){
            withCredentials([usernamePassword(credentialsId: 'nexus-docker-creds', 
                                           usernameVariable: 'NEXUS_USER', 
                                           passwordVariable: 'NEXUS_PASS')]) {
@@ -26,6 +26,7 @@ node {
                docker push 54.209.205.3:8082/prem:1.0.0
             """
         }
+    }
     stage('Remove Previous Container'){
 	try{
 		sh 'docker rm -f myapplication'
